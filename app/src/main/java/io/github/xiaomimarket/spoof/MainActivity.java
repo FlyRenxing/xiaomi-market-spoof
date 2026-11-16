@@ -1,21 +1,27 @@
 package io.github.xiaomimarket.spoof;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
 
-public final class MainActivity extends Activity {
+/**
+ * 使用系统 Preference 页面展示模块说明，跟随设备原生设置风格。
+ */
+@SuppressWarnings("deprecation")
+public final class MainActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setText(R.id.value_manufacturer, DeviceIdentity.MANUFACTURER);
-        setText(R.id.value_device, DeviceIdentity.DEVICE);
-        setText(R.id.value_model, DeviceIdentity.MODEL);
+        addPreferencesFromResource(R.xml.preferences);
+        setSummary("manufacturer", DeviceIdentity.MANUFACTURER);
+        setSummary("device", DeviceIdentity.DEVICE);
+        setSummary("model", DeviceIdentity.MODEL);
     }
 
-    private void setText(int id, String value) {
-        TextView view = findViewById(id);
-        view.setText(value);
+    private void setSummary(String key, String value) {
+        Preference preference = findPreference(key);
+        if (preference != null) {
+            preference.setSummary(value);
+        }
     }
 }

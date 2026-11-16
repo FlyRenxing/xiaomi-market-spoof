@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/section_identity">
+        <Preference
+            android:key="manufacturer"
+            android:selectable="false"
+            android:title="@string/label_manufacturer" />
+        <Preference
+            android:key="device"
+            android:selectable="false"
+            android:title="@string/label_device" />
+        <Preference
+            android:key="model"
+            android:selectable="false"
+            android:title="@string/label_model" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/section_problem">
+        <Preference
+            android:selectable="false"
+            android:summary="@string/problem_body"
+            android:title="@string/problem_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/section_usage">
+        <Preference
+            android:selectable="false"
+            android:summary="@string/usage_step_1"
+            android:title="@string/usage_step_1_title" />
+        <Preference
+            android:selectable="false"
+            android:summary="@string/usage_step_2"
+            android:title="@string/usage_step_2_title" />
+        <Preference
+            android:selectable="false"
+            android:summary="@string/usage_step_3"
+            android:title="@string/usage_step_3_title" />
+        <Preference
+            android:selectable="false"
+            android:summary="@string/usage_step_4"
+            android:title="@string/usage_step_4_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/section_note">
+        <Preference
+            android:selectable="false"
+            android:summary="@string/note_body"
+            android:title="@string/note_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
