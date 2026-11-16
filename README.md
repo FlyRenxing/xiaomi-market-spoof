@@ -1,6 +1,6 @@
 # 小米应用商店伪装
 
-LSPosed 模块。只在小米应用商店（`com.xiaomi.market`）进程内，把机型伪装成 **Xiaomi / madrid / 2611FPNFAG**（小米 18 Pro Max）。
+LSPosed 模块，包名 `io.github.flyrenxing.marketspoof`。只在小米应用商店（`com.xiaomi.market`）进程内，把机型伪装成 **Xiaomi / madrid / 2611FPNFAG**（小米 18 Pro Max）。
 
 它**不会**修改全局 `getprop`。其他应用仍然看到真实机型。
 
@@ -98,7 +98,7 @@ android.aapt2FromMavenOverride=/path/to/sdk/build-tools/37.0.0/aapt2
 ## 工程结构
 
 ```text
-app/src/main/java/io/github/xiaomimarket/spoof/MarketSpoofModule.java
+app/src/main/java/io/github/flyrenxing/marketspoof/MarketSpoofModule.java
 app/src/main/resources/META-INF/xposed/java_init.list
 app/src/main/resources/META-INF/xposed/module.prop
 app/src/main/resources/META-INF/xposed/scope.list
@@ -112,6 +112,15 @@ app/src/main/resources/META-INF/xposed/scope.list
 - `minApiVersion` / `targetApiVersion` = 102
 - Hook 写法：`hook(executable).setId(...).intercept(chain -> ...)`
 - 目标 API 是 102，因此不会调用旧的 `de.robv.android.xposed`
+
+## 提交到 LSPosed 模块仓库
+
+`lsposed-repo/` 里是给 [Xposed-Modules-Repo](https://github.com/Xposed-Modules-Repo/submission) 用的说明文件，不要把源码推进那个仓库。
+
+1. 用 GitHub 账号开 Issue，标题为 `[submission] io.github.flyrenxing.marketspoof`
+2. 接受机器人邀请后，把 `SUMMARY`、`README.md`、`SCOPE`、`SOURCE_URL` 推到官方仓库
+3. 在网页上填写仓库 Description 为「小米应用商店伪装」
+4. 发布带 APK 的 Release，tag 形如 `5-1.1.0`
 
 ## 声明
 

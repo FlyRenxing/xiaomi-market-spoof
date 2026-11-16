@@ -3,16 +3,16 @@ plugins {
 }
 
 android {
-    namespace = "io.github.xiaomimarket.spoof"
+    namespace = "io.github.flyrenxing.marketspoof"
     compileSdk = 37
     buildToolsVersion = "37.0.0"
 
     defaultConfig {
-        applicationId = "io.github.xiaomimarket.spoof"
+        applicationId = "io.github.flyrenxing.marketspoof"
         minSdk = 26
         targetSdk = 37
-        versionCode = (findProperty("versionCode") as String?)?.toIntOrNull() ?: 4
-        versionName = "1.0.3"
+        versionCode = (findProperty("versionCode") as String?)?.toIntOrNull() ?: 5
+        versionName = "1.1.0"
     }
 
     buildTypes {

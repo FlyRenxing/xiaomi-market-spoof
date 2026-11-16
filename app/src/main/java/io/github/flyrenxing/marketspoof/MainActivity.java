@@ -1,4 +1,4 @@
-package io.github.xiaomimarket.spoof;
+package io.github.flyrenxing.marketspoof;
 
 import android.app.Activity;
 import android.os.Bundle;
