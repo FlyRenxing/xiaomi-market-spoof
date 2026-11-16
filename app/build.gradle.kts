@@ -11,7 +11,7 @@ android {
         applicationId = "io.github.xiaomimarket.spoof"
         minSdk = 26
         targetSdk = 37
-        versionCode = 4
+        versionCode = (findProperty("versionCode") as String?)?.toIntOrNull() ?: 4
         versionName = "1.0.3"
     }
 

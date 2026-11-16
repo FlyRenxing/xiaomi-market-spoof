@@ -1,9 +1,13 @@
-name: 编译
+name: 编译并发布
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   assemble:
@@ -23,8 +27,42 @@ jobs:
             ln -s android-37.0 "$ANDROID_HOME/platforms/android-37"
           fi
       - name: 编译 Release
-        run: ./gradlew --no-daemon :app:assembleRelease
+        run: ./gradlew --no-daemon :app:assembleRelease -PversionCode=$((GITHUB_RUN_NUMBER + 100))
+      - name: 重命名 APK
+        run: cp app/build/outputs/apk/release/app-release.apk xiaomi-market-spoof.apk
       - uses: actions/upload-artifact@v4
         with:
           name: xiaomi-market-spoof
-          path: app/build/outputs/apk/release/*.apk
+          path: xiaomi-market-spoof.apk
+      - name: 生成发布说明
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          {
+            echo "每次推送到 \`main\` 都会覆盖更新这个 Latest 发布。"
+            echo
+            echo "- 提交：\`${GITHUB_SHA}\`"
+            echo "- 构建号：\`${GITHUB_RUN_NUMBER}\`"
+            echo
+            echo "本次提交说明："
+            echo
+            echo '```'
+            git log -1 --pretty=%B
+            echo '```'
+          } > release-notes.md
+      - name: 发布 Latest
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          artifacts: xiaomi-market-spoof.apk
+          bodyFile: release-notes.md
+          makeLatest: true
+          name: Latest
+          omitBodyDuringUpdate: false
+          omitNameDuringUpdate: false
+          prerelease: false
+          removeArtifacts: true
+          replacesArtifacts: true
+          tag: latest
+          token: ${{ secrets.GITHUB_TOKEN }}

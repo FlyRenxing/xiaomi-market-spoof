@@ -33,7 +33,7 @@ LSPosed 模块。只在小米应用商店（`com.xiaomi.market`）进程内，�
 
 ## 安装
 
-1. 自行编译，或使用 Release 里的 APK。
+1. 从 [Latest Release](https://github.com/FlyRenxing/xiaomi-market-spoof/releases/latest) 下载 APK，或自行编译。每次推送到 `main` 都会覆盖更新这个发布。
 2. 安装 APK。
 3. 打开 LSPosed，启用 **小米应用商店伪装**。
 4. 作用域保持为 `com.xiaomi.market`。
