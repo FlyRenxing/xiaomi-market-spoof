@@ -5,7 +5,7 @@
     <application
         android:description="@string/xposed_description"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.DeviceDefault.Settings"
+        android:theme="@style/Theme.MarketSpoof"
         tools:ignore="MissingApplicationIcon">
         <activity
             android:name=".MainActivity"
