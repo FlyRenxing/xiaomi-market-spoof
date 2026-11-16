@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Xiaomi Market Spoof</string>
+    <string name="xposed_description">Only inside Xiaomi GetApps, spoof the device as Xiaomi 18 Pro Max (madrid / 2611FPNFAG). Does not change global system properties.</string>
+    <string name="spoof_identity">Spoof identity: %1$s</string>
+    <string name="main_body">This is a modern LSPosed module (libxposed API 102).\n\nEnable it in LSPosed, keep the recommended scope as com.xiaomi.market only, then force-stop Xiaomi GetApps.\n\nIt rewrites Build fields and SystemProperties reads inside the store process. It does not change getprop for the rest of the phone.</string>
+</resources>
