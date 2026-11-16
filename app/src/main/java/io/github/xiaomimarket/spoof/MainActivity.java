@@ -9,7 +9,13 @@ public final class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView identity = findViewById(R.id.identity);
-        identity.setText(getString(R.string.spoof_identity, DeviceIdentity.describe()));
+        setText(R.id.value_manufacturer, DeviceIdentity.MANUFACTURER);
+        setText(R.id.value_device, DeviceIdentity.DEVICE);
+        setText(R.id.value_model, DeviceIdentity.MODEL);
+    }
+
+    private void setText(int id, String value) {
+        TextView view = findViewById(id);
+        view.setText(value);
     }
 }

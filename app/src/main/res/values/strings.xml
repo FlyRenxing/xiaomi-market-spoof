@@ -2,6 +2,15 @@
 <resources>
     <string name="app_name">小米应用商店伪装</string>
     <string name="xposed_description">仅在小米应用商店进程内，将机型伪装为小米 18 Pro Max（madrid / 2611FPNFAG），避免商店按型号限制下载速度。不修改全局系统属性。</string>
-    <string name="spoof_identity">伪装身份：%1$s</string>
-    <string name="main_body">这是使用现代 LSPosed API（libxposed API 102）的模块。\n\n小米应用商店会按机型控制下载管理器是否限速。本模块只在商店进程内把机型改成 Xiaomi / madrid / 2611FPNFAG。\n\n请在 LSPosed 中启用本模块，作用域只勾选 com.xiaomi.market，然后强行停止小米应用商店。\n\n它会改写商店进程里的 Build 字段和 SystemProperties 读取结果，不会改整机 getprop。</string>
+    <string name="page_subtitle">只改商店进程，不改整机机型</string>
+    <string name="section_identity">伪装身份</string>
+    <string name="label_manufacturer">厂商 / 品牌</string>
+    <string name="label_device">设备代号</string>
+    <string name="label_model">型号</string>
+    <string name="section_problem">解决什么问题</string>
+    <string name="problem_body">小米应用商店会按机型控制下载管理器是否限速。部分机型打开商店后下载会明显变慢。\n\n本模块只在商店进程内，把可见机型改成小米 18 Pro Max，让商店按该机型的策略下载，从而避开按型号下发的限速。</string>
+    <string name="section_usage">使用方法</string>
+    <string name="usage_body">1. 在 LSPosed 中启用本模块\n2. 作用域只勾选「小米应用商店」\n3. 强行停止小米应用商店\n4. 重新打开商店后再下载</string>
+    <string name="section_note">说明</string>
+    <string name="note_body">不会修改全局 getprop，其他应用仍看到真实机型。也不会改指纹或 MIUI 版本号。</string>
 </resources>

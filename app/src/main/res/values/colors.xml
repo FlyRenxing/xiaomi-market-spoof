@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="page_background">#FFF4F6F8</color>
+    <color name="card_background">#FFFFFFFF</color>
+    <color name="text_primary">#FF1A1C1E</color>
+    <color name="text_secondary">#FF5F6368</color>
+    <color name="text_accent">#FF0B74E5</color>
+    <color name="divider">#1A1A1C1E</color>
+    <color name="chip_background">#140B74E5</color>
+</resources>
