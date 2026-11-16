@@ -12,11 +12,11 @@ import io.github.libxposed.api.XposedModule;
 import io.github.libxposed.api.XposedModuleInterface;
 
 /**
- * LSPosed modern API 102 entry. Scope is {@code com.xiaomi.market} only.
+ * LSPosed 现代 API 102 入口。作用域仅限 {@code com.xiaomi.market}。
  * <p>
- * Hooks are installed as soon as the module is loaded into a GetApps process
- * so later store code that reads {@link Build} or {@code SystemProperties}
- * sees the spoofed Xiaomi 18 Pro Max identity.
+ * 模块一加载进商店进程就会安装钩子，后续商店代码读取 {@link Build}
+ * 或 {@code SystemProperties} 时，会看到伪装后的小米 18 Pro Max 身份，
+ * 从而避开按机型对下载管理器的限速。
  */
 public final class MarketSpoofModule extends XposedModule {
     static final String TAG = "MarketSpoof";
@@ -24,12 +24,12 @@ public final class MarketSpoofModule extends XposedModule {
     @Override
     public void onModuleLoaded(XposedModuleInterface.ModuleLoadedParam param) {
         if (param.isSystemServer()) {
-            log(Log.WARN, TAG, "loaded in system_server, detaching");
+            log(Log.WARN, TAG, "加载到 system_server，正在脱离");
             detach();
             return;
         }
-        log(Log.INFO, TAG, "onModuleLoaded process=" + param.getProcessName()
-                + " framework=" + getFrameworkName()
+        log(Log.INFO, TAG, "onModuleLoaded 进程=" + param.getProcessName()
+                + " 框架=" + getFrameworkName()
                 + " " + getFrameworkVersion()
                 + " api=" + getApiVersion());
         applyBuildFields();
@@ -39,7 +39,7 @@ public final class MarketSpoofModule extends XposedModule {
     @Override
     public void onPackageLoaded(XposedModuleInterface.PackageLoadedParam param) {
         if (!DeviceIdentity.MARKET_PACKAGE.equals(param.getPackageName())) {
-            log(Log.INFO, TAG, "ignoring package " + param.getPackageName());
+            log(Log.INFO, TAG, "忽略包名 " + param.getPackageName());
             return;
         }
         log(Log.INFO, TAG, "onPackageLoaded " + param.getPackageName()
@@ -53,7 +53,7 @@ public final class MarketSpoofModule extends XposedModule {
             return;
         }
         log(Log.INFO, TAG, "onPackageReady classloader=" + param.getClassLoader()
-                + " spoof=" + DeviceIdentity.describe());
+                + " 伪装=" + DeviceIdentity.describe());
         applyBuildFields();
     }
 
@@ -65,8 +65,8 @@ public final class MarketSpoofModule extends XposedModule {
 
     @Override
     public void onHotReloaded(XposedModuleInterface.HotReloadedParam param) {
-        log(Log.INFO, TAG, "onHotReloaded process=" + param.getProcessName()
-                + " oldHooks=" + param.getOldHookHandles().size());
+        log(Log.INFO, TAG, "onHotReloaded 进程=" + param.getProcessName()
+                + " 旧钩子数量=" + param.getOldHookHandles().size());
         param.getOldHookHandles().forEach(XposedInterface.HookHandle::unhook);
         applyBuildFields();
         installPropertyHooks();
@@ -77,9 +77,9 @@ public final class MarketSpoofModule extends XposedModule {
             Class<?> systemProperties = Class.forName("android.os.SystemProperties");
             hookStringGetter(systemProperties, "get", String.class);
             hookStringGetter(systemProperties, "get", String.class, String.class);
-            log(Log.INFO, TAG, "SystemProperties hooks installed, spoof=" + DeviceIdentity.describe());
+            log(Log.INFO, TAG, "SystemProperties 钩子已安装，伪装=" + DeviceIdentity.describe());
         } catch (Throwable t) {
-            log(Log.ERROR, TAG, "failed to hook SystemProperties", t);
+            log(Log.ERROR, TAG, "挂钩 SystemProperties 失败", t);
         }
     }
 
@@ -105,7 +105,7 @@ public final class MarketSpoofModule extends XposedModule {
         setStaticField(Build.class, "PRODUCT", DeviceIdentity.PRODUCT);
         setStaticField(Build.class, "MODEL", DeviceIdentity.MODEL);
         applyMiuiBuildFields();
-        log(Log.INFO, TAG, "Build fields now MODEL=" + Build.MODEL
+        log(Log.INFO, TAG, "Build 字段现在 MODEL=" + Build.MODEL
                 + " DEVICE=" + Build.DEVICE
                 + " BRAND=" + Build.BRAND
                 + " MANUFACTURER=" + Build.MANUFACTURER
@@ -118,9 +118,9 @@ public final class MarketSpoofModule extends XposedModule {
             setStaticField(miuiBuild, "DEVICE", DeviceIdentity.DEVICE);
             setStaticField(miuiBuild, "PRODUCT", DeviceIdentity.PRODUCT);
             setStaticField(miuiBuild, "MODEL", DeviceIdentity.MODEL);
-            log(Log.INFO, TAG, "miui.os.Build fields updated");
+            log(Log.INFO, TAG, "miui.os.Build 字段已更新");
         } catch (ClassNotFoundException ignored) {
-            // AOSP-only processes do not ship MIUI helpers.
+            // 纯 AOSP 进程没有 MIUI 辅助类。
         }
     }
 
@@ -133,7 +133,7 @@ public final class MarketSpoofModule extends XposedModule {
             }
             field.set(null, value);
         } catch (Throwable t) {
-            log(Log.ERROR, TAG, "failed to set " + owner.getName() + "." + name, t);
+            log(Log.ERROR, TAG, "设置 " + owner.getName() + "." + name + " 失败", t);
         }
     }
 
@@ -143,9 +143,9 @@ public final class MarketSpoofModule extends XposedModule {
             accessFlags.setAccessible(true);
             accessFlags.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         } catch (NoSuchFieldException ignored) {
-            // ART may not expose this Java-level field; Field.set can still succeed.
+            // ART 可能不暴露这个 Java 层字段；Field.set 仍有可能成功。
         } catch (IllegalAccessException ignored) {
-            // Best-effort only. SystemProperties hooks remain the primary path.
+            // 尽力而为。主要路径仍是 SystemProperties 钩子。
         }
     }
 }

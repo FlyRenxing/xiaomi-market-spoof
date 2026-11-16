@@ -20,6 +20,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles("proguard-rules.pro")
+            // 仅用于本机测试；正式发布请换成自己的签名配置。
             signingConfig = signingConfigs["debug"]
         }
     }

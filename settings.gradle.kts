@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Xiaomi Market Spoof"
+rootProject.name = "小米应用商店伪装"
 
 include(":app")

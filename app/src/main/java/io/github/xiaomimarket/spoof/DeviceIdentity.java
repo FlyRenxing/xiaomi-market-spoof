@@ -3,12 +3,11 @@ package io.github.xiaomimarket.spoof;
 import java.util.Map;
 
 /**
- * Device identity that Xiaomi GetApps should observe inside its own process.
+ * 小米应用商店在本进程内应看到的设备身份。
  * <p>
- * The combination was verified on a REDMI K90 Pro Max (25102RKBEC / myron):
- * switching the store-visible manufacturer/brand, device and model to these
- * values lifted GetApps download throttling. This module never writes global
- * {@code getprop} values.
+ * 这组值在 REDMI K90 Pro Max（25102RKBEC / myron）上验证过：
+ * 把商店可见的厂商、品牌、设备代号和型号改成这些值后，
+ * 商店按机型对下载管理器的限速会解除。本模块从不写入全局 {@code getprop}。
  */
 final class DeviceIdentity {
     static final String BRAND = "Xiaomi";

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Xiaomi Market Spoof</string>
-    <string name="xposed_description">Only inside Xiaomi GetApps, spoof the device as Xiaomi 18 Pro Max (madrid / 2611FPNFAG). Does not change global system properties.</string>
-    <string name="spoof_identity">Spoof identity: %1$s</string>
-    <string name="main_body">This is a modern LSPosed module (libxposed API 102).\n\nEnable it in LSPosed, keep the recommended scope as com.xiaomi.market only, then force-stop Xiaomi GetApps.\n\nIt rewrites Build fields and SystemProperties reads inside the store process. It does not change getprop for the rest of the phone.</string>
+    <string name="app_name">小米应用商店伪装</string>
+    <string name="xposed_description">仅在小米应用商店进程内，将机型伪装为小米 18 Pro Max（madrid / 2611FPNFAG），避免商店按型号限制下载速度。不修改全局系统属性。</string>
+    <string name="spoof_identity">伪装身份：%1$s</string>
+    <string name="main_body">这是使用现代 LSPosed API（libxposed API 102）的模块。\n\n小米应用商店会按机型控制下载管理器是否限速。本模块只在商店进程内把机型改成 Xiaomi / madrid / 2611FPNFAG。\n\n请在 LSPosed 中启用本模块，作用域只勾选 com.xiaomi.market，然后强行停止小米应用商店。\n\n它会改写商店进程里的 Build 字段和 SystemProperties 读取结果，不会改整机 getprop。</string>
 </resources>

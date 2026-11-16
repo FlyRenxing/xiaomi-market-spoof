@@ -1,4 +1,4 @@
-name: Build
+name: 编译
 
 on:
   push:
@@ -15,14 +15,14 @@ jobs:
           distribution: temurin
           java-version: 21
       - uses: android-actions/setup-android@v3
-      - name: Accept licenses and install SDK
+      - name: 接受许可并安装 SDK
         run: |
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platforms;android-37.0" "build-tools;37.0.0" || sdkmanager "platforms;android-37" "build-tools;37.0.0"
           if [ -d "$ANDROID_HOME/platforms/android-37.0" ] && [ ! -e "$ANDROID_HOME/platforms/android-37" ]; then
             ln -s android-37.0 "$ANDROID_HOME/platforms/android-37"
           fi
-      - name: Assemble release
+      - name: 编译 Release
         run: ./gradlew --no-daemon :app:assembleRelease
       - uses: actions/upload-artifact@v4
         with:
